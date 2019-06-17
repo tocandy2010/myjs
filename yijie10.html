@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //switch 是以 === 做比較
+        //default 不是一定要寫 也不一定要放在最後
+        let month = 0;
+        switch (month) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                document.write(31);
+                break;
+            case 4: case 6: case 9: case 11:
+                document.write(30);
+                break;
+            case 2:
+                document.write(28);
+                break;
+            default:
+                document.write("這是月份嗎");
+        }   
+    </script>
+</body>
+
+</html>

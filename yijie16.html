@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //多維陣列
+        let a = [];
+        document.write(a.length);
+
+        a[0] = [];
+        a[1] = [];
+        a[0][0] = 123;
+        a[0][1] = 100;
+        a[1][0] = 12;
+        a[2] = 34;
+
+        for (i in a) {
+            if (typeof a[i] !== Object) {
+                document.write(a[i] + " ")
+            } else {
+                for (j in a[i]) {
+                    document.write(a[i][j] + " ")
+                }
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

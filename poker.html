@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let poker = [];
+        for(let i=0;i<52;i++){
+            let rand = parseInt(Math.random()*52); //0~51
+            for(let j=0;j<i;j++){
+                if(poker[j]==rand){
+                    poker = [];
+                    i = 0;
+                }
+            }
+            poker[i] = rand;
+        }
+        for(let i in poker){
+            document.write(poker[i]+'<br/>')
+        }
+    </script>
+</body>
+</html>

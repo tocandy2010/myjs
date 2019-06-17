@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //for 迴圈
+        //let 為區域宣告 存活{}內
+        //for參數
+        //1.進入迴圈的初始動作
+        //2.條件
+        //3.執行
+        function myinit(){
+            document.write("Hello");
+        }
+        function drawLine(){
+            document.write("<hr/>")
+        }
+        let i = 0
+        for(myinit();i<10;drawLine()){
+            document.write(i++);
+        }    
+        alert(i)
+    </script>
+</body>
+</html>
