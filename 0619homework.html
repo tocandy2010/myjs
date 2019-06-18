@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <input type="number" id = 'n1' placeholder="起始值">
+    <input type="number" id='n1' placeholder="起始值">
     <span>範圍</span>
-    <input type="number" id = 'n2' placeholder="停止值">
-    <input type="button" value="尋找質數" id = "find">
+    <input type="number" id='n2' placeholder="停止值">
+    <input type="button" value="尋找質數" id="find">
+    <div id="show"></div>
     <script>
         let find = document.getElementById("find");
-        find.addEventListener("click",function(){
+        find.addEventListener("click", function () {
             let n1 = document.getElementById("n1").value;
             let n2 = document.getElementById("n2").value;
-            let data  = [];
-            for(let i=Number(n1);i<=n2;i++){
+            let show = document.getElementById("show");
+            let merge = ""
+            let data = []; //放輸入的範圍值
+            n1 = Number(n1);
+            n2 = Number(n2);
+            if (n1 > n2 || (n1 < 0 || n2 <= 0)) {  //起始值大於停止值 或 小於1 報錯
+                alert("錯誤範圍");
+                return false;
+            }
+            if (n1 < 1) { //
+                alert("錯誤：質數為自然數中除了1和本身以外不含零");
+                n1 = 1;
+                document.getElementById("n1").value = 1;
+            }
+            for (let i = Number(n1); i <= n2; i++) {
                 data.push(i)
             }
-            let answer = [];
-            for(let i=data[0];i<=data.length;i++){
-                for(let j=2;j<=n2;j++){
-                    if(i%j===0){
-                        break;
-                    }else if(i===j){
-                        break;
-                    }
-                    answer.push(i)
+            merge += "<table border=1 style='width:100%'><tr><td>1</td>";
+            for (let i = Number(data[0]); i <= data[data.length - 1]; i++) {
+                let flag = true //判斷是否為質數標記
+                if (i <= 1) {
+                    i = 2;
                 }
+                for (let j = 2; j <= i; j++) {
+                    if (i % j === 0) {
+                        if (i === j) {
+                            merge += "<td style='background-color:red'>" + i + "</td>";
+                            flag = false;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (flag) {
+                    merge += "<td>" + i + "</td>";
+                }
+                if (i % 4 === 0) {
+                    merge += "</tr>";
+                }
+
+
             }
-            console.log(answer)
-        })
-    
+            merge += "</table>";
+            show.innerHTML = merge;
+        }, false)
+
+
+
+
     </script>
 </body>
+
 </html>
