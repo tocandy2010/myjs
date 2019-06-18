@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    
+    <input type="text" id="id">
+    <input type="button" value="檢查" onclick="ckId()">
+    <script src="./yijieapis.js"></script>
+    <script>
+        function ckId() {
+            let id = document.getElementById("id");
+            let isRight = checkTWId(id.value);
+            if (!isRight) {
+                alert("xx");
+            } else {
+                alert("OK");
+            }
+        }
+    </script>
+</body>
+
+</html>

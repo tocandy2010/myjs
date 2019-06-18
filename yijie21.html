@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //function 命名原則  動詞+做甚麼 例如:checkInput
+
+        function sayYa(...names){  //不定參數
+            document.write(names)
+        }
+
+        sayYa();
+        sayYa("A");
+        sayYa("A","B");
+
+        let f1 = function(x,y){
+            return x+y
+        }
+        alert(f1(1,1))
+        let f2 = f1;
+
+        alert(f2(5,1))
+
+    </script>
+</body>
+</html>

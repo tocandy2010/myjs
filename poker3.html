@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let poker = [];
+        for (let i = 0; i < 52; i++) {
+            poker[i] = i;
+        }
+        for (let i = poker.length - 1; i > 0; i--) {
+            let rand = parseInt(Math.random() * (i + 1));
+            [poker[i], poker[rand]] = [poker[rand], poker[i]]
+        }
+        console.log(poker)
+
+        let player = [[], [], [], []];
+
+        for (let i = 0; i < poker.length; i++) {
+            player[i % 4][parseInt(i / 4)] = poker[i];
+        }
+
+        for (let i of player) {
+            document.write(i + "<br/>")
+        }
+
+
+
+    </script>
+
+    <table border='1' width="100%" style="border-collapse:collapse">
+        <script>
+            let suits = ["&spades;", "&hearts;", "&diamond;", "&clubs;"];
+            let nums = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+            for (let p of player) {
+                document.write("<tr>");
+                for (let i of p) {
+                    document.write("<td>");
+                    document.write(suits[parseInt(i / 13)] + nums[i % 13]);
+                    document.write("</td>");
+                }
+                document.write("</tr>");
+            }
+        </script>
+    </table>
+</body>
+
+</html>

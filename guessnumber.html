@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src = "./yijieapis.js"></script>
+    <script>
+        let answer = createAnswer(3);
+        let data = '';
+        let time = 1;
+        function doGuess() {
+            let guess = document.getElementById("guess");
+            let log = document.getElementById("log")
+            let result = checkAB(answer,guess.value);
+            
+            data += time+".猜"+guess.value+"答"+result+"<br>";
+            log.innerHTML = data;
+            guess.value = "";
+            guess.focus();
+            if(time>=10){
+                data += "<br>答案是"+answer;
+                log.innerHTML = data;
+                alert("game over");
+                return 
+            }else if(result === "3A0B"){
+                alert("winner");
+            }
+            time++;
+        }
+        function reset(){
+            if(!confirm("確認重新?")){
+                return ;
+            }
+            let log = document.getElementById("log");
+            log.innerHTML = ""
+            answer = createAnswer(3);
+            data=""
+
+        }
+    </script>
+    <h1>Guess Number Game</h1>
+    <hr />
+    <input type="number" id='guess'>
+    <input type="button" value="提出" onclick="doGuess()">
+    <input type="button" value="清除" onclick="reset()">
+    <hr />
+    <div id="log"></div>
+</body>
+
+</html>

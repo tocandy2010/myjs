@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <span>1+2+3+....</span>
+    <input type="number" id = "n">
+    <input type="button" value="=" id = "send">
+    <SPan id = "result"></SPan>
+    <script>
+        let send = document.getElementById("send");
+        send.addEventListener("click",function(){
+            let n = document.getElementById("n");
+            let result = document.getElementById("result");
+            let start = 1;
+            let data = 0;
+            while(start<=Number(n.value)){
+                data+=start;
+                start++;
+            }
+            result.innerHTML = data;
+        })
+
+    </script>
+</body>
+
+</html>
