@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id = 'n1' placeholder="起始值">
+    <span>範圍</span>
+    <input type="number" id = 'n2' placeholder="停止值">
+    <input type="button" value="尋找質數" id = "find">
+    <script>
+        let find = document.getElementById("find");
+        find.addEventListener("click",function(){
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+            let data  = [];
+            for(let i=Number(n1);i<=n2;i++){
+                data.push(i)
+            }
+            let answer = [];
+            for(let i=data[0];i<=data.length;i++){
+                for(let j=2;j<=n2;j++){
+                    if(i%j===0){
+                        break;
+                    }else if(i===j){
+                        break;
+                    }
+                    answer.push(i)
+                }
+            }
+            console.log(answer)
+        })
+    
+    </script>
+</body>
+</html>
