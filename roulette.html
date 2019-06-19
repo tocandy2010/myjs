@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 30px;
+        }
+
+        #div_all {
+            border: 5px solid black;
+            width: 832px;
+            height: 832px;
+            position: relative;
+            left: 12%;
+            background-color: rgb(245, 213, 216);
+        }
+
+        #d_top>div {
+            display: inline-block;
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            float: left;
+            text-align: center;
+        }
+
+        #d_left {
+            display: inline-block;
+            width: 100px;
+            height: 600px;
+            position: relative;
+        }
+
+        #d_left>div {
+            display: inline-block;
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            float: left;
+            text-align: center;
+        }
+
+        #d_right {
+            display: inline-block;
+            width: 100px;
+            height: 600px;
+            position: absolute;
+            left: 728px;
+            top: 104px;
+        }
+
+        #d_right>div {
+            display: inline-block;
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            float: left;
+            text-align: center;
+        }
+
+        #d_floor {
+            height: 100px;
+        }
+
+        #d_floor>div {
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            float: right;
+            position: relative;
+            top: 624px;
+            left: -104px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div_all">
+        <div id="d_top">
+            <div class="roulette">開始</div>
+            <div class="roulette">1</div>
+            <div class="roulette">2</div>
+            <div class="roulette">3</div>
+            <div class="roulette">4</div>
+            <div class="roulette">5</div>
+            <div class="roulette">6</div>
+            <div class="roulette">7</div>
+        </div>
+        <div id="d_right">
+            <div class="roulette">8</div>
+            <div class="roulette">9</div>
+            <div class="roulette">10</div>
+            <div class="roulette">11</div>
+            <div class="roulette">12</div>
+            <div class="roulette">13</div>
+            <div class="roulette">14</div>
+        </div>
+        <div id="d_floor">
+            <div class="roulette">15</div>
+            <div class="roulette">16</div>
+            <div class="roulette">17</div>
+            <div class="roulette">18</div>
+            <div class="roulette">19</div>
+            <div class="roulette">20</div>
+            <div class="roulette">21</div>
+        </div>
+        <div id="d_left">
+            <div class="roulette_l">27</div>
+            <div class="roulette_l">26</div>
+            <div class="roulette_l">25</div>
+            <div class="roulette_l">24</div>
+            <div class="roulette_l">23</div>
+            <div class="roulette_l">22</div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            let roulette = document.getElementsByClassName("roulette");
+            let roulette_l = document.getElementsByClassName("roulette_l");
+            let flag = 0;
+            let rou_trd;
+            let rou_l;
+            rou_trd = setInterval(rou_run, 40);
+
+            function rou_run() {
+                if (flag <= 0) {
+                    roulette_l[0].style = "background-color:none"; 
+                    roulette[flag].style = "background-color:red";  
+                } else {
+                    roulette_l[1].style = "background-color:none";
+                    roulette[flag - 1].style = "background-color:none";
+                    roulette[flag].style = "background-color:red";
+                }
+                flag++;
+                if (flag >= roulette.length) {
+                    roulette[flag - 1].style = "background-color:none";
+                    clearInterval(rou_trd);
+                    flag = 5;
+                    rou_l = setInterval(l_run, 60);
+                }
+            }
+
+            function l_run() {
+                if (flag === 0) {
+                    roulette_l[flag].style = "background-color:none";
+                    roulette_l[flag+1].style = "background-color:none";
+                    flga = 0;
+                    clearInterval(rou_l);
+                    rou_trd = setInterval(rou_run, 60);
+                    return
+                }
+                roulette[roulette.length - 1].style = "background-color:red";
+                if (flag >= 5) {
+                    roulette_l[flag].style = "background-color:red";
+                } else {
+                    roulette[roulette.length - 1].style = "background-color:none";
+                    roulette_l[flag + 1].style = "background-color:none";
+                    roulette_l[flag].style = "background-color:red";
+                }
+                flag--;
+            }
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>
