@@ -19,35 +19,3 @@ function checkTWId(id) {
     }
 }
 
-function createAnswer(n = 3) {
-    let data = [];
-
-    for (let i = 0; i < 10; i++) {
-        data[i] = i;
-    }
-    for (let i = data.length - 1; i > 0; i--) {
-        let rand = parseInt(Math.random() * (n + 1));
-        [data[rand], data[i]] = [data[i], data[rand]]
-    }
-    let ret = '';
-    for (let i = 0; i < n; i++) {
-        ret += data[i];
-    }
-
-    return ret;
-}
-
-
-function checkAB(ans, gus) {
-    let a = 0, b = 0;
-    for (let i = 0; i < gus.length; i++) {
-        if (gus.charAt(i) === ans.charAt(i)) {
-            a++;
-            continue;
-        }
-        if (ans.indexOf(gus.charAt(i))>=0) {
-            b++;
-        }
-    }
-    return a + "A" + b + "B";
-}

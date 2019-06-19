@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="produceTWId.js"></script>
+    <style>
+        #alldiv {
+            position: absolute;
+            left: 40%;
+        }
+
+        #show {
+            display: block;
+            width: 200px;
+            height: 20px;
+            border: 1px solid black;
+            font-size: 20px
+        }
+
+        .error {
+            color: darkred;
+            font-size: 12px;
+            font-weight: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="alldiv">
+        <h1>身分字號產生器</h1>
+        <hr />
+        <div>
+            <div>
+                <span>性別選擇 : </span>
+                <label for="sex">Man</label>
+                <input type="radio" name="sex" id="man" checked>
+                <label for="sex">Woman</label>
+                <input type="radio" name="sex" id="woman">
+                <span id="sexerror" class="error"></span>
+            </div>
+            <br />
+            <div>
+                <span>縣市選擇 : </span>
+                <select name="" id="region">
+                    <option value="">請選擇</option>
+                    <option value="10">臺北市</option>
+                    <option value="11">臺中市</option>
+                    <option value="12">基隆市</option>
+                    <option value="13">臺南市</option>
+                    <option value="14">高雄市</option>
+                    <option value="15">新北市</option>
+                    <option value="16">宜蘭縣</option>
+                    <option value="17">桃園市</option>
+                    <option value="34">嘉義市</option>
+                    <option value="18">新竹縣</option>
+                    <option value="19">苗栗縣</option>
+                    <option value="21">南投縣</option>
+                    <option value="22">彰化縣</option>
+                    <option value="35">新竹市</option>
+                    <option value="23">雲林縣</option>
+                    <option value="24">嘉義縣</option>
+                    <option value="27">屏東縣</option>
+                    <option value="28">花蓮縣</option>
+                    <option value="29">臺東縣</option>
+                    <option value="32">金門縣</option>
+                    <option value="30">澎湖縣</option>
+                    <option value="33">連江縣</option>
+                </select>
+                <span id="reginerror" class="error"></span>
+            </div>
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        <span id="show"></span>
+                    </td>
+                    <td>
+                        <input type="button" value="產生" id="create">                       
+                        <!-- <input type="checkbox">
+                        <span>X5</span> -->
+                    </td>
+                <tr>
+                    <td>
+                        <span id = "createerror" class = "error"></span>
+                    </td>
+                </tr>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+
+        window.onload = function () {
+            let man = document.getElementById("man");
+            let woman = document.getElementById("woman");
+            let show = document.getElementById("show");
+            let region = document.getElementById("region");
+            let cerate = document.getElementById("create");
+            let sexerror = document.getElementById("sexerror");
+            let reginerror = document.getElementById("reginerror");
+            let createerror = document.getElementById("createerror");
+
+            let usersex = '1';  //性別(預設為man)
+            let userregin = '0';  //城市區域
+            let idnumber = ""; //產生號的身分證字號放這
+
+            man.addEventListener("click", function () { //點擊man
+                usersex = "1"
+            }, false)
+            woman.addEventListener("click", function () { //點擊woman
+                usersex = "2"
+            }, false)
+            region.addEventListener("change", function () {
+                userregin = this.value
+            }, false)
+
+            create.addEventListener("click", function () {
+                show.innerHTML = ""; //點選生產按鈕後清空錯誤訊息
+                createerror.innerHTML = ""; //點選生產按鈕後清空錯誤訊息
+                let id = "";
+                if (usersex == "1" || usersex == "2") {
+                    sexerror.innerHTML = ""
+                } else {
+                    sexerror.innerHTML = "性別錯誤"
+                    return false;
+                }
+
+                if (userregin == 0) {
+                    reginerror.innerHTML = "錯誤城市"
+                    return false;
+                } else {
+                    reginerror.innerHTML = ""
+                }
+
+                id = createId(usersex, userregin);
+                console.log(id)
+                if (id === false) {
+                    createerror.innerHTML = "出了點問題，請重新整理網頁後再試一次"
+                }else{
+                    show.innerHTML = id;
+                }
+            }, false)
+
+        }
+    </script>
+</body>
+
+</html>

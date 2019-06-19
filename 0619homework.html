@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        td{
+            width:100px;
+            text-align: center;
+        }
+    
+    </style>
 </head>
 
 <body>
@@ -24,11 +31,12 @@
             let data = []; //放輸入的範圍值
             n1 = Number(n1);
             n2 = Number(n2);
+            let addtr = 0;
             if (n1 > n2 || (n1 < 0 || n2 <= 0)) {  //起始值大於停止值 或 小於1 報錯
                 alert("錯誤範圍");
                 return false;
             }
-            if (n1 < 1) { //
+            if (n1 < 1) { 
                 alert("錯誤：質數為自然數中除了1和本身以外不含零");
                 n1 = 1;
                 document.getElementById("n1").value = 1;
@@ -36,7 +44,11 @@
             for (let i = Number(n1); i <= n2; i++) {
                 data.push(i)
             }
-            merge += "<table border=1 style='width:100%'><tr><td>1</td>";
+            merge += "<table border=1 style='width:100%'><tr>";
+                if(n1 == 1){
+                    merge+="<td>1</td>";
+                    addtr+=1;
+                }
             for (let i = Number(data[0]); i <= data[data.length - 1]; i++) {
                 let flag = true //判斷是否為質數標記
                 if (i <= 1) {
@@ -55,14 +67,15 @@
                 if (flag) {
                     merge += "<td>" + i + "</td>";
                 }
-                if (i % 4 === 0) {
+                addtr+=1;
+                if (addtr % 4 === 0) {
                     merge += "</tr>";
+                    addtr=0;
                 }
-
-
             }
             merge += "</table>";
             show.innerHTML = merge;
+            alert((n2-n1+1)%4)
         }, false)
 
 

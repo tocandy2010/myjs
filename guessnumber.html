@@ -6,49 +6,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        #guesscancel {
+            display: none
+        }
+    </style>
 </head>
 
 <body>
-    <script src = "./yijieapis.js"></script>
+    <script src="./guessnumber.js"></script>
     <script>
-        let answer = createAnswer(3);
+        let answer;
         let data = '';
         let time = 1;
+        let flag = true;
+        let guessNum = 0
+
+        function setnum() {
+            let guessnum = document.getElementById("guessnum");  // 輸入幾位數框
+            let num = document.getElementById("num");  // 輸入幾位數框
+            let guessset = document.getElementById("guessset"); //輸入幾位數框區
+            let guesscancel = document.getElementById("guesscancel"); //取消輸入幾位數框區
+            guessnum = parseInt(guessnum.value);
+            guessNum = guessnum;
+            num.innerHTML = guessNum
+            answer = createAnswer(guessNum);
+            guessset.style.display = "none";
+            guesscancel.style.display = "block"
+
+        }
+
+        function numclacel(obj) {
+            if (confirm("確定修改嗎? 將重新開局")) {
+                let guessset = document.getElementById("guessset"); //輸入幾位數框區
+                let guesscancel = document.getElementById("guesscancel"); //取消輸入幾位數框區
+                guessNum = 0;
+                guessset.style.display = "block";
+                guesscancel.style.display = "none"
+                answer = ""
+                time = 10;
+                reset();
+            }
+        }
+
+
         function doGuess() {
             let guess = document.getElementById("guess");
-            let log = document.getElementById("log")
-            let result = checkAB(answer,guess.value);
-            
-            data += time+".猜"+guess.value+"答"+result+"<br>";
-            log.innerHTML = data;
-            guess.value = "";
-            guess.focus();
-            if(time>=10){
-                data += "<br>答案是"+answer;
+            let log = document.getElementById("log")    
+            let guessnum = document.getElementById("guessnum")
+            if (parseInt(answer) <= 0 || isNaN(parseInt(answer))) {
+                alert("錯誤:尚未輸入本局要猜幾位數字")
+                cleanguess();
+                guessnum.focus();
+                return false
+            }
+            let result = checkAB(answer, guess.value);
+            if (flag === false) {
+                if (!confirm("本局已結束是否開新局")) {
+                    return;
+                } else {
+                    cleanguess();
+                    return reset();
+                }
+            }
+            if (!(guessnum.value == guess.value.length) || isNaN(parseInt(guess.value))) {
+                alert("輸入不正確 請輸入一個"+guessnum.value+"位數字")
+                cleanguess();
+                return;
+            }
+
+            if (time >= 10) {
+                data += time + ".猜" + guess.value + " 提示:" + result + "<br>";
+                data += "<br>答案是" + answer;
                 log.innerHTML = data;
                 alert("game over");
-                return 
-            }else if(result === "3A0B"){
+                flag = false;
+                guess.value = "";
+                cleanguess();
+                return
+            } else {
+                data += time + ".猜" + guess.value + " 提示:" + result + "<br>";
+                log.innerHTML = data;
+                time++;
+                cleanguess();
+            }
+            if (result == guessnum.value+"A0B") {
+                data += "<br>答案是" + answer;
+                log.innerHTML = data;
                 alert("winner");
+                flag = false;
+                guess.value = "";
+                cleanguess();
+                return
             }
-            time++;
+
         }
-        function reset(){
-            if(!confirm("確認重新?")){
-                return ;
+
+        function reset() {
+            if (time < 10 && flag!==false) { //如果flag是true 的話表示猜到一半 提示
+                if (!confirm("確認重新?")) {
+                    return;
+                }
             }
+
             let log = document.getElementById("log");
             log.innerHTML = ""
-            answer = createAnswer(3);
-            data=""
-
+            data = ""
+            time = 1;
+            cleanguess();
+            answer = createAnswer(guessNum);
+            flag = true;
         }
     </script>
     <h1>Guess Number Game</h1>
     <hr />
+    <div id="guessset">
+        <div>輸入本局要猜幾位數字</div>
+        <input type="number" id="guessnum" value="3">
+        <input type="button" value="確認" onclick="setnum()">
+    </div>
+    <div id="guesscancel">
+        <span id="num">4</span><span>位數</span>
+        <input type="button" value="取消" onclick="numclacel()">
+    </div>
+    <hr />
     <input type="number" id='guess'>
     <input type="button" value="提出" onclick="doGuess()">
-    <input type="button" value="清除" onclick="reset()">
+    <input type="button" value="重開本局" onclick="reset()">
     <hr />
     <div id="log"></div>
 </body>
