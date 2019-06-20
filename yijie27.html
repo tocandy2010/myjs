@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <select name="textAlign" id="textAlign" onchange="chAlign()">
+        <option value="">default</option>
+        <option value="left">left</option>
+        <option value="right">right</option>
+        <option value="center">center</option>
+    </select>
+    <div id="mytext" style="text-align: center">Hello</div>
+    <script>
+        let mytext = document.getElementById("mytext");
+        for(let key in mytext.style){
+            console.log(key+":"+mytext.style[key]);
+        }
+
+        function chAlign(){
+            let mytext = document.getElementById("mytext");
+            let style = document.getElementById("textAlign")
+
+            mytext.style[style.name] = style.value;
+
+
+        }
+    </script>
+</body>
+</html>

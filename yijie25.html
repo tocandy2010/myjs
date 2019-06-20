@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let bike= new Object();  //
+        bike.speed = 12;
+        bike.gear = 2
+        bike.upSpeed = function(){
+            this.speed = this.speed * this.gear * 1.2;
+        }
+        bike.downSpeed = function(){
+            this.speed = this.speed * this.gear *0.7;
+        }
+
+        document.write(bike.speed+"<br/>");
+        bike.upSpeed();
+        bike.upSpeed();
+        bike.downSpeed
+        bike.downSpeed
+        bike.downSpeed
+        document.write(bike.speed+"<br/>");
+
+
+        let bike2 = {
+            speed:4,
+            gear:4,
+            upSpeed: function(){
+                this.speed = this.speed * 1.4;
+            }
+        }
+
+        document.write(bike2.speed+"<br/>");
+        bike2.upSpeed();
+        bike2.upSpeed();
+        document.write(bike2.speed+"<br/>");
+        //bike2["upSpeed"]();寫成 bike2.upSpeed();是一樣的
+        bike2["upSpeed"]();
+
+        document.write(bike2.speed+"<br/>");
+
+        let method = "upSpeed";
+        bike2[method]();  //方法可以用變數調用
+        document.write(bike2.speed+"<hr/>");
+
+        for(let key in bike2){
+            document.write(key+bike[key]+"<br>");
+        }
+
+        document.write("<hr/>");
+        for(let key in window){
+            document.write(key+window[key]+"<br>");
+        }
+
+
+    </script>
+</body>
+</html>

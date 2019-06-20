@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <canvas id="canvas" width="480px" height="320px" style="border:1px solid black"></canvas>
+    <script>
+        let ctx = canvas.getContext('2d');
+        let bg = new Image();
+        bg.src = './images.jfif';
+        let ballX = 100;
+        let ballY = 100;
+        let dx = 8, dy = 8;
+        let balls = [];
+        let ball = new Image();
+
+        bg.onload = function () {
+            ctx.drawImage(bg, 0, 0, 480, 320);
+            ball.src = './ball.png';
+            ball.onload = function () {
+                ctx.drawImage(ball, ballX, ballY);
+            }
+        }
+
+        function refreshView() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(bg, 0, 0, 480, 320);
+            for(let i=0;i<balls.length;i++){
+                ctx.drawImage(ball,balls[i].x,balls[i].y)
+            }
+            ctx.drawImage(ball, ballX, ballY);
+        }
+
+        function go() {
+            /*if (ballX < 0 || ballX + 48 > canvas.width) {
+                dx *= -1;
+            }
+            if (ballY < 0 || ballY + 48 > canvas.height) {
+                dy *= -1;
+            }
+            ballX += dx;
+            ballY += dy;*/
+
+            for(let i=0;i<balls.length;i++){
+                moveBall(balls[i]);
+            }
+
+        }
+
+        function moveBall(obj){
+            if (obj.x < 0 || ballX + 48 > canvas.width) {
+                obj.dx *= -1;
+            }
+            if (obj.y < 0 || ballY + 48 > canvas.height) {
+                obj.dy *= -1;
+            }
+            obj.x += obj.dx;
+            obj.y += obj.dy;
+        }
+
+        canvas.onmousedown = function (e) {
+            let ballObj = {
+                x: e.offsetX - 24,
+                y: e.offsetY - 24,
+                dx: 8,
+                dy: 8,
+            }
+            balls[balls.length] = ballObj
+        }
+        setInterval(refreshView, 30);
+        setInterval(go,60);
+    </script>
+    <input type="button" value="GO!" onclick="go()">
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let body = document.createElement('body');
+        document.body = body;
+
+        let head = document.createElement("h1");
+        //head.innerHTML = "Yijie";
+        //document.body.appendChild(head)
+
+        let h1text = document.createTextNode("Hello,world");
+        head.appendChild(h1text);
+        document.body.appendChild(head);
+        h1text.textContent = "Hello, Yijie";
+
+        let hr = document.createElement("hr");
+        document.body.appendChild(hr);
+
+        let ul = document.createElement("ul");
+        body.appendChild(ul);
+
+        let tempLi
+        for (let i = 0; i < 3; i++) {
+            let li = document.createElement("li");
+            li.textContent = `第${i}個資料`
+            ul.appendChild(li)
+
+            if (i == 1) tempLi = li;
+        }
+
+        let hr2 = hr.cloneNode();
+        body.appendChild(hr2);
+
+
+        let ul2 = ul.cloneNode(/*true*/);  //true 為深度註解
+        body.appendChild(ul2);  //clone 只有物件實體 底下並沒有
+        for (let i = 0; i < 3; i++) {
+            let li = document.createElement("li");
+            li.textContent = `第${i}個資料`
+            ul.appendChild(li)
+        }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

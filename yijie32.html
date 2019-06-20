@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="text" onclick="test1()">
+
+    <script>
+        //try catch finally
+        function test1() {
+            n = parseInt(Math.random() * 101);
+            document.write(n+"<br/>")
+
+            try {
+                test2(n);
+            }catch(e){
+                document.write("not OK<br/>");
+            }finally{
+                //一定會執行，就算是提早return也會
+            }
+            
+            document.write("is OK<br/>");
+        }
+
+        function test2(a) {
+            if (a >= 60) {
+                document.write("OKOK<br/>");
+            } else {
+                throw "Ooop!";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

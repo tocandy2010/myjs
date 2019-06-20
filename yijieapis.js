@@ -19,3 +19,15 @@ function checkTWId(id) {
     }
 }
 
+
+function cloneobj(obj){
+    if(typeof(obj) != 'object'){
+        return false;
+    }
+    let target = new Object();
+    for(key in obj){
+        target[key] = obj[key];
+    }
+    return target;
+}
+

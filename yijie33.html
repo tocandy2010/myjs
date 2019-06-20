@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="480px" height="320px" style="border:1px solid black"></canvas>
+    <input type="button" value="清除" onclick="clearCanvas()">
+    <input type="button" value="移動" onclick="moveBall()">
+    <script>
+        /*
+        let ctx = canvas.getContext('2d'); //畫布
+        ctx.fillStyle = "rgb(255,0,0)";  //顏料
+        ctx.fillRect(50, 50, 100, 120);  //畫
+
+        ctx.fillStyle = "rgba(255,255,0,0.5)";  //rgba 顏色+透明度
+        ctx.fillRect(70, 70, 200, 200);  //實心 x y 寬 高
+
+        ctx.fillStyle = "rgb(0,0,255)";
+        ctx.strokeRect(100, 100, 50, 50); //空心 x y 寬 高
+
+        ctx.moveTo(75, 50);
+        ctx.lineTo(100, 75);
+        ctx.lineTo(100, 25);
+        ctx.stroke();
+        */
+
+        let ctx = canvas.getContext('2d'); //畫布
+        ctx.fillStyle = "rgba(0,0,123,0.3)";
+        ctx.fillRect(0,0,480,320);
+        let isDrag = false;  //標記使用者是否要停止
+        canvas.onmouseup = function (e) {  // 滑鼠放開後事件
+            isDrag = false;
+            console.log("mouse " + e.offsetX)
+        }
+        canvas.onmousemove = function (e) {  // 滑鼠移動事件
+            if (isDrag === true) {
+                //console.log("mouse " + e.offsetX)  
+                ctx.lineTo(e.offsetX, e.offsetY); //滑鼠移動點
+                ctx.stroke(); //畫線
+                
+            }
+
+        }
+        canvas.onmousedown = function (e) {  //滑鼠點下去事件
+            isDrag = true;
+            ctx.strokeStyle = "rgb(0,0,255)";
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);  //起始點
+            console.log("mouse " + e.offsetX);
+        }
+
+        function clearCanvas(){  //清除功能
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+        }
+
+        let ball = new Image();
+        ball.src = "./ball.png"; //引入外部圖片
+        ball.onload = function(){  //外部資源建議呼叫onload等進來後才畫上去
+            ctx.drawImage(ball,240,240);
+        }
+
+        function moveBall(){
+            ctx.clearRect(240,240,480,480)
+            ctx.drawImage(ball,0,0);
+        }
+        
+
+    </script>
+</body>
+
+</html>

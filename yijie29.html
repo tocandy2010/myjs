@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let body = document.createElement("body");
+        document.body = body;
+        let table = document.createElement("table");
+        
+
+        body.appendChild(table);
+        table.setAttribute("border", "1");
+        table.setAttribute("width", "100px");
+        
+        for (let k=0;k<2;k++){
+            let tr = document.createElement("tr");
+            table.appendChild(tr);
+        }
+        for (let i = 2; i <= 5; i++) {
+            let td = document.createElement("td");
+            tr.appendChild(td);
+            for (let j = 1; j <= 9; j++) {
+                td.innerHTML += `${i}X${j}=${i*j}<br/>`
+            }
+
+
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
