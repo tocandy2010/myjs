@@ -18,12 +18,12 @@
         bg.src = './images.jfif';
         let ballX = 100;
         let ballY = 100;
-        let dx = 8, dy = 8;
+        let dx = 10, dy = 10;
         let balls = [];
         let ball = new Image();
 
         bg.onload = function () {
-            ctx.drawImage(bg, 0, 0, 480, 320);
+            ctx.drawImage(bg, 0, 0, 480,320);
             ball.src = './ball.png';
             ball.onload = function () {
                 ctx.drawImage(ball, ballX, ballY);
@@ -40,14 +40,14 @@
         }
 
         function go() {
-            /*if (ballX < 0 || ballX + 48 > canvas.width) {
+            if (ballX < 0 || ballX + 48 > canvas.width) {
                 dx *= -1;
             }
             if (ballY < 0 || ballY + 48 > canvas.height) {
                 dy *= -1;
             }
             ballX += dx;
-            ballY += dy;*/
+            ballY += dy;
 
             for(let i=0;i<balls.length;i++){
                 moveBall(balls[i]);
@@ -70,8 +70,8 @@
             let ballObj = {
                 x: e.offsetX - 24,
                 y: e.offsetY - 24,
-                dx: 8,
-                dy: 8,
+                dx: 10,
+                dy: 10,
             }
             balls[balls.length] = ballObj
         }
