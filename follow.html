@@ -13,12 +13,13 @@
             position: relative;
             left: 100px;
         }
-        #controll_wall{
+
+        #controll_wall {
             width: 300px;
-            height:100px;
+            height: 100px;
             position: absolute;
             top: 200px;
-            right:100px;
+            right: 100px;
         }
 
         #canvas {
@@ -33,33 +34,119 @@
     <div id="convas_wall">
         <canvas id="canvas" width="700px" height="600px"></canvas>
     </div>
-    <div id = "controll_wall">
-        <input type="button" value="跟隨" id = "follow">
-        <input type="button" value="別再跟了" id = "nofollow">
+    <div id="controll_wall">
+        <input type="button" value="跟隨" id="follow" onclick="startrun()">
+        <input type="button" value="別再跟了" id="nofollow">
     </div>
 
     <script>
-        let ctx = canvas.getContext('2d');
-        ctx.fillStyle = "rgba(0,0,0,0.1)";
-        ctx.fillRect(0,0,700,600);
-        let flag = false;
+        /*let ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "rgb(0,0,255)";
+        ctx.moveTo(170, 59);
+        ctx.lineTo(175, 66);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+        ctx.lineTo(184, 74);
+        ctx.lineWidth = 10;
+        ctx.stroke();*/
 
-        canvas.onmousedown = function(ev){
+        let ctx = canvas.getContext('2d');
+        ctx.strokeStyle = "rgb(0,0,255)";
+        ctx.fillStyle = "rgba(0,0,0,0.1)";
+        ctx.fillRect(0, 0, 700, 600);
+        let flag = false;
+        let path = [];
+        let runcount = 0;
+        let start;
+        let refresh;
+        let savePath = [];
+
+        for (let j = 0; j < path.length - 1; j++) {
+            let cut = path[j].indexOf(",");
+            let setx = path[j].slice(0, cut);
+            let sety = path[j].slice(cut + 1);
+            setx = Number(setx);
+            sety = Number(sety);
+            ctx.beginPath();
+                ctx.moveTo(setx, sety);
+                ctx.lineTo(setx, sety);
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = "rgb(0,0,255)";
+                ctx.stroke();
+        }
+        runcount++;
+        if (runcount > (path.length - 1)) {
+            ctx.closePath();
+            stop();
+        }
+
+
+
+
+        canvas.onmousedown = function (ev) {
             ctx.beginPath();
             ctx.strokeStyle = "rgb(0,0,255)";
             flag = true;
-            ctx.moveTo(ev.offsetX,ev.offsetY);
+            ctx.moveTo(ev.offsetX, ev.offsetY);
         }
 
-        canvas.onmousemove = function(ev){
-            if(flag === true){
-                ctx.lineTo(ev.offsetX,ev.offsetY)
+        canvas.onmousemove = function (ev) {
+            if (flag === true) {
+                let coordinate = "";
+                coordinate += `${ev.offsetX},${ev.offsetY}`;
+                ctx.lineTo(ev.offsetX, ev.offsetY);
+                ctx.lineWidth = 10;
                 ctx.stroke();
+                path.push(coordinate);
             }
         }
 
-        canvas.onmouseup = function(ev){
+        canvas.onmouseup = function (ev) {
             flag = false
+            ctx.closePath();
+        }
+
+        function refreshView() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(0,0,0,0.1)";
+            ctx.fillRect(0, 0, 700, 600);
+        }
+
+        function run() {
+            for (let i = 0; i <= (runcount - 1); i++) {
+                savePath[i] = path[i];
+            }
+            ctx.beginPath();
+            for (let j = 0; j < savePath.length - 1; j++) {
+                let cut = savePath[j].indexOf(",");
+                let setx = savePath[j].slice(0, cut);
+                let sety = savePath[j].slice(cut + 1);
+                if (j <= 0) {
+                    ctx.moveTo(setx, sety);
+                }
+                ctx.lineTo(setx, sety);
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = "rgb(0,0,255)";
+                ctx.stroke();
+            }
+            runcount++;
+            if (runcount > (path.length - 1)) {
+                ctx.closePath();
+                stop();
+            }
+        }
+
+
+
+        function startrun() {
+            refresh = setInterval(refreshView, 1000);
+            start = setInterval(run, 1000);
+
+        }
+
+        function stop() {
+            clearInterval(start);
+            clearInterval(refresh);
         }
 
     </script>
