@@ -40,15 +40,6 @@
     </div>
 
     <script>
-        /*let ctx = canvas.getContext('2d');
-        ctx.strokeStyle = "rgb(0,0,255)";
-        ctx.moveTo(170, 59);
-        ctx.lineTo(175, 66);
-        ctx.lineWidth = 10;
-        ctx.stroke();
-        ctx.lineTo(184, 74);
-        ctx.lineWidth = 10;
-        ctx.stroke();*/
 
         let ctx = canvas.getContext('2d');
         ctx.strokeStyle = "rgb(0,0,255)";
@@ -61,24 +52,6 @@
         let refresh;
         let savePath = [];
 
-        for (let j = 0; j < path.length - 1; j++) {
-            let cut = path[j].indexOf(",");
-            let setx = path[j].slice(0, cut);
-            let sety = path[j].slice(cut + 1);
-            setx = Number(setx);
-            sety = Number(sety);
-            ctx.beginPath();
-                ctx.moveTo(setx, sety);
-                ctx.lineTo(setx, sety);
-                ctx.lineWidth = 10;
-                ctx.strokeStyle = "rgb(0,0,255)";
-                ctx.stroke();
-        }
-        runcount++;
-        if (runcount > (path.length - 1)) {
-            ctx.closePath();
-            stop();
-        }
 
 
 
@@ -139,8 +112,8 @@
 
 
         function startrun() {
-            refresh = setInterval(refreshView, 1000);
-            start = setInterval(run, 1000);
+            refresh = setInterval(refreshView, 60);
+            start = setInterval(run, 60);
 
         }
 

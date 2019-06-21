@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id = "test1">Big Company</h1>
+    <div id="content">
+        <h1>I am H1</h1>
+        <p>P1</p>
+        <hr/>
+        <h2>I am H2</h2>
+        <P>P1</P>
+    </div>
+    <hr/>
+    <input type="button" value="GO!" id="go"><br>
+    <input type="text" class="inputText"><br>
+    <input type="text" class="inputText"><br>
+    <input type="text" class="inputText"><br>
+    <script>
+        //Jquery 選擇器
+        $("#test1").click(function(){
+            $("#test1").css('color','red').css("background-color","blue");
+            let ps = $("p");  //jquery轉原生
+            for(let p of ps){
+                p.style.color = "blue";
+                p.style.backgroundColor  ="yellow";
+            }
+
+            $jObj = $(document.getElementById('content'));  //原生轉jquery
+            $jObj.css("background-color","pink");
+
+        });
+
+        $("#go").click(function(){
+            $('.inputText').val("Hello");
+            $(this).attr("disabled","disabled")
+            setTimeout(function(){
+                $("#go").attr("disabled",false)
+            },10)
+        })
+
+    </script>
+</body>
+</html>

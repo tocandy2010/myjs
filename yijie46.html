@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src = "yijieapis.js"></script>
+    <script>
+        function wopen(){
+            window.open("","myWindow","width=200","height=100");
+        }
+
+        console.log(window.navigator.language);  //使用者語言
+        //console.log(window.navigator.geolocation.navigator.geolocation.watchPosition(1, 2, 3));  //使用者語言
+
+        function gotoBackend(){
+            let account = document.getElementById("account");
+            let password1 = document.getElementById("password1");
+            let password2 = document.getElementById("password2");
+            let twid = document.getElementById("twid");
+            let flag = false;
+            
+            
+
+            return flag;
+        }
+
+    </script>
+
+    <form action="" method="get" onsubmit="return gotoBackend();">
+        *Account : <input type="text" id = "account"><br/>
+        *Password1 : <input type="password" id ="password1"><br/>
+        *Password2 : <input type="password" id ="password2"><br/>
+        *TW Id :<input type="text" id = "twid"><br/>
+        Memo : <textarea name="" id="" cols="30" rows="10" id=memo></textarea>
+        <input type="submit">
+    </form>
+    
+</body>
+</html>

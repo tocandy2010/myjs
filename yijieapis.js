@@ -19,15 +19,26 @@ function checkTWId(id) {
     }
 }
 
-
 function cloneobj(obj){
     if(typeof(obj) != 'object'){
         return false;
     }
     let target = new Object();
     for(key in obj){
-        target[key] = obj[key];
+        if(typeof obj[key] != 'object'){
+            target[key] = obj[key];
+        }else{
+            target[key] = cloneobj(obj[key])
+        }
+        
     }
     return target;
+}
+
+function checkIssanm(p1,p2){
+    if(pa !== p2){
+        return false;
+    }
+    return true;
 }
 
