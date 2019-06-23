@@ -53,6 +53,13 @@
         </div>
     </div>
     <div id="ucontrol">
+        <div>
+            <h2>每局 100 點</h2>
+            <p>選取一組號碼，猜中點數2倍，差1位1.5倍，差2位1.1倍</p>
+            <span>代幣</span>
+            <span id='point'>500</span>
+            <div id='addpoint'>儲值</div>
+        </div>
         <div id="ustart">開始</div>
     </div>
     <script>
@@ -60,32 +67,51 @@
             let str = 0;
             let end = 27;  //輪盤長度
             let flag = 0;
-            let isUseing = false;
+            let isUseing = false;  //是否正在遊玩中
             let run = false; //標記是否開始輪盤快轉
-            let runfast;
-            let isStop = false;
+            let runfast; //是否開始加速
+            let isStop = false;  //是否要停止
+            let userchoseone = -1;
+            let isaddPoint;
 
             document.getElementById("ustart").addEventListener("click", function () {
+                let point = document.getElementById('point');
+                if (isUseing === true) { //遊玩中按開始無效
+                    return false
+                }
+                if (userchoseone < 0 || isNaN(userchoseone)) {
+                    alert('請選擇號一組號碼')
+                    return false;
+                }
+                if (Number(point.innerHTML) < 100) {
+                    alert("代幣不足，請儲值");
+                    return false
+                } else {
+                    point.innerHTML -= 100;
+                }
+
+                isUseing = true;
                 isStop = false;
                 setTimeout(function () {
-                    addspeed(flag);
+                    addspeed(flag, userchoseone);
                 }, 0);
                 setTimeout(function () {
-                    addspeed(flag + 1);
+                    addspeed(flag + 1, userchoseone);
                 }, 1000);
                 setTimeout(function () {
-                    addspeed(flag + 2);
+                    addspeed(flag + 2, userchoseone);
                 }, 2000);
                 setTimeout(function () {
-                    addspeed(flag + 3);
+                    addspeed(flag + 3, userchoseone);
                     flag = flag + 3;
                     run = true;
                 }, 2500);
 
+                flag = overflow(flag);
+
                 runfast = setInterval(function () {
-                    console.log(flag)
                     if (run == true) {
-                        addspeed(flag);
+                        addspeed(flag, userchoseone);
                         if (isStop == true) {
                             return false;
                         } else {
@@ -97,14 +123,68 @@
                         }
                     }
                 }, 20);
-                setTimeout(function () {
+                setTimeout(function () {  //產生亂路區間停止時間
                     isStop = true;
                     run = false;
                     stopflag = flag;
                     stop(runfast);
-                }, createRand(6, 11));
+
+                    setTimeout(function () {
+                        addspeed(flag, userchoseone);
+                    }, 1000);
+                    setTimeout(function () {
+                        addspeed(flag + 1, userchoseone);
+                    }, 1700);
+                    setTimeout(function () {
+                        addspeed(flag + 2, userchoseone);
+                        setTimeout(function () {
+                            win(flag, 'yellow');
+                        }, 300);
+                        flag += 2;
+                        isaddpoint = isWin(flag, userchoseone);
+                        if (isaddpoint) {
+                            point.innerHTML = Number(point.innerHTML) + isaddpoint;
+                        }
+
+                        isUseing = false; //遊玩結束後開啟開始按鈕
+                    }, 2500);
+
+                    flag = overflow(flag);
+
+                }, createRand(6, 13) * 1000);
 
             });
+
+            document.getElementById("roulette_wall").addEventListener("click", function (ev) {
+
+                if (isUseing === true) {  //開始後就不能選號碼
+                    return false;
+                }
+
+                let range = [];
+                for (let i = 0; i <= end; i++) {
+                    range.push(i)
+                }
+                let chose = range.indexOf(Number(ev.target.innerHTML));
+
+                if (chose < 0) {
+                    return false;
+                }
+
+                if (userchoseone >= 0) {
+                    document.getElementById(userchoseone).style = "background-color:none";
+                }
+
+                document.getElementById(chose).style = "background-color:green";
+                userchoseone = chose;
+
+            })
+
+            document.getElementById("addpoint").addEventListener("click",function(){
+                let point = document.getElementById('point');
+                point.innerHTML = Number(point.innerHTML)+100;
+
+            })
 
         }
 
